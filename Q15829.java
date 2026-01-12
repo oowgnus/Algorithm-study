@@ -3,18 +3,28 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Q15829 {
-    static int getHash(String line, int [] index){
+    static long getHash(String line, int [] index){
 
         int r = 31;
         int M = 1234567891;
         
-        int result = 0;
+        long result = 0;
         for(int i=0;i<index.length;i++){
             index[i] = line.charAt(i) - 96;
-            result += (int)Math.pow(r, i)*index[i]%M;
+            long mul = 1;
+
+            for(int j=0;j<i;j++){
+                if(i == 0){
+                    break;
+                }
+                mul *= r;
+                mul %= M;
+            }
+            result = (result + mul * index[i]) % M;
         }
         return result;
     }
+
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int num = Integer.parseInt(br.readLine());
