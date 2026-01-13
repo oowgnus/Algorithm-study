@@ -18,13 +18,17 @@ public class Q28702 {
                 int num = Integer.parseInt(index[i]);
                 count =  Integer.parseInt(index[i]) + (3-i);
                 if(count%3 == 0 && count%5==0){
-                System.out.println("FizzBuzz");
+                    System.out.println("FizzBuzz");
+                    break;
                 }else if (count%3 == 0 && count%5!=0){
-                System.out.println("Fizz");
+                    System.out.println("Fizz");
+                    break;
                 }else if(count%3 != 0 && count%5==0){
-                System.out.println("Buzz");
+                    System.out.println("Buzz");
+                    break;
                 }else{
-                System.out.println(count);
+                    System.out.println(count);
+                    break;
                 }
             }catch(NumberFormatException e){
                 continue;
