@@ -17,15 +17,10 @@ public class Q11866 {
 
         for(int i=0;i<N;i++){
             queue.offer(i+1);
-        }
-
-        for(int i=0;i<K;i++){
-
-        }
-        
+        }    
         sb.append("<");
 
-        while (!queue.isEmpty()) {
+        while (queue.size()>1) {
             for(int i=0;i<K-1;i++){
                 queue.offer(queue.poll());
             }
