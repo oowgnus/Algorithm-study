@@ -7,7 +7,7 @@ import java.util.StringTokenizer;
 public class Q10816 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
+        StringBuilder sb = new StringBuilder();
         
         int N = Integer.parseInt(br.readLine());
         HashMap<Integer, Integer> map1 = new HashMap<Integer, Integer>(N);
@@ -28,7 +28,13 @@ public class Q10816 {
 
         st = new StringTokenizer(br.readLine());
         for(int i=0;i<M;i++){
-            System.out.print(map1.get(Integer.parseInt(st.nextToken()))+" ");
+            int a = Integer.parseInt(st.nextToken());
+            if(map1.containsKey(a)){
+                sb.append(map1.get(a)+" ");
+            }else{
+                sb.append("0 ");
+            }
         }
+        System.out.println(sb);
     }
 }
