@@ -8,51 +8,51 @@ public class Q2108 {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     StringBuilder sb = new StringBuilder();
 
-    int N = Integer.parseInt(br.readLine());
+    int N = Integer.parseInt(br.readLine()); 
+
     int [] index = new int[N];
+
     for(int i=0;i<N;i++){
       index[i] = Integer.parseInt(br.readLine());
     }
+
     Arrays.sort(index);
 
-    int avr = 0;
-
-    int med;
-    if(N == 1){
-      med = index[0];
-    }else{
-      med = index[(int)(N/2)];
-    }
-    int range = index[N-1] - index[0];
-
+    double average = 0;
     for(int i=0;i<N;i++){
-      avr += index[i];
+      average += index[i];
     }
-    avr /= N;
+    average = Math.round(average/N);
 
-    int [] count = new int[8001];
-    int maxCount = 0;
+    int median = index[(N+1)/2 -1];
+
     int mode = 0;
-    for(int num : index){
-      count[num+4000]++;
-    }
-
-    for(int i=0;i<count.length;i++){
-      if(count[i]>maxCount){
-        maxCount = count[i];
-        mode = i;
+    int max = 0;
+    int [] count = new int [8001];
+    for(int i : index){
+      count[i+4000]++;
+      if(max < count[i+4000]){
+        max = count[i+4000];
       }
     }
-    int most = index[count[mode]];
-    if(mode == 1){
-      most = index[1];
-    }
-  
-    sb.append(avr+"\n");
-    sb.append(med+"\n");
-    sb.append(most+"\n");
-    sb.append(range);
 
+    boolean flag = false;
+    for(int i=0;i<count.length;i++){
+      if(count[i] == max){
+        if(flag){
+          mode = i -4000;
+          break;
+        }
+
+        mode = i-4000;
+        flag = true;
+      }
+    }
+
+
+    int range = index[N-1] - index[0];
+
+    sb.append((int)average+"\n"+median+"\n"+mode+"\n"+range);
     System.out.println(sb);
   }
 }
