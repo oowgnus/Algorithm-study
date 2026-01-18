@@ -15,7 +15,7 @@ public class Q9375 {
             HashMap<String, Integer> map = new HashMap<>();
 
             int n = Integer.parseInt(br.readLine());
-            int count = n;
+            int count = 1;
 
             for(int j=0;j<n;j++){
                 StringTokenizer st = new StringTokenizer(br.readLine());
@@ -30,18 +30,12 @@ public class Q9375 {
             }
 
             Set<String> keys = map.keySet();
-            int a;
-            if(keys.size() > 1){
-                a = 1;
-            }else{
-                a = 0;
-            }
             for(String key : keys){
-                a = a*map.get(key);
+                int a = map.get(key);
+                count = count * (a+1);
             }
 
-            count = count + a;
-            System.out.println(count);
+            System.out.println(count-1);
         }
     }
 }
