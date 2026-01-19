@@ -10,7 +10,7 @@ public class Q9461 {
         
         for(int i=0;i<T;i++){
             int N = Integer.parseInt(br.readLine());
-            int [] dp = new int[101];
+            long [] dp = new long[101];
             dp[0] = 1;
             dp[1] = 1;
             dp[2] = 1;
