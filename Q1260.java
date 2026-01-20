@@ -28,11 +28,11 @@ public class Q1260 {
         flag[start-1] = true;
         while (!queue.isEmpty()) {
             int current = queue.poll();
+            sb.append(current +" ");
             for(int i=0;i<N;i++){
                 if(index[current-1][i] == 1 && !flag[i]){
                     queue.offer(i+1);
                     flag[i] = true;
-                    sb.append(i+1+" ");
                 }
             }
         }
@@ -59,6 +59,7 @@ public class Q1260 {
 
         dfs(V);
         System.out.println(sb);
+        flag = new boolean[N];
         bfs(V);
         System.out.println(sb);
     }
