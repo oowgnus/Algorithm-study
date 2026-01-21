@@ -20,8 +20,10 @@ public class Q10984 {
                 a += b;
                 gpa += (c*b); 
             }
+            double value = gpa/a;
+            double result = Math.round(value*10) / 10.0;
 
-            System.out.println(a+" "+(gpa/a));
+            System.out.println(a+" "+result);
         }
     }
 }
