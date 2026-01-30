@@ -33,5 +33,37 @@ public class Q14940 {
         }
       }
     }
+
+    int[] dx = {1,-1,0,0};
+    int[] dy = {0,0,1,-1};
+
+    while(!queue.isEmpty()){
+      int[] curr = queue.poll();
+      int r = curr[0];
+      int c = curr[1];
+      
+      for(int i=0;i<4;i++){
+        int nr = r + dx[i];
+        int nc = c + dy[i];
+
+        if(nr<0 || nr>=n || nc<0 || nc>=m) continue;
+
+        if(visited[nr][nc] || map[nr][nc] == 0) continue;
+
+        visited[nr][nc] = true;
+        distance[nr][nc] = distance[r][c] +1;
+        queue.offer(new int[]{nr,nc});
+      }
+    }
+
+    StringBuilder sb = new StringBuilder();
+    for(int i=0;i<n;i++){
+      for(int j=0;j<m;j++){
+        sb.append(distance[i][j]).append(" ");
+      }
+      sb.append("\n");
+    }
+
+    System.out.println(sb);
   }
 }
