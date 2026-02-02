@@ -3,16 +3,20 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class Q29751 {
+public class Q26209 {
+
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
 
-        double w = Double.parseDouble(st.nextToken());
-        double h = Double.parseDouble(st.nextToken());
+        for(int i=0;i<8;i++){
+            int a = Integer.parseInt(st.nextToken());
+            if(a == 9){
+                System.out.println("F");
+                return;
+            }
+        }
 
-        double a = w*h/2;
-
-        System.out.printf("%.1f",a);
+        System.out.println("S");
     }
 }
