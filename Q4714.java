@@ -14,7 +14,7 @@ public class Q4714 {
 
             System.out.print("Objects weighing ");
             System.out.printf("%.2f",a);
-            System.out.print(" on Earth whill weigh ");
+            System.out.print(" on Earth will weigh ");
             System.out.printf("%.2f",b);
             System.out.println(" on the moon.");
         }
