@@ -12,7 +12,7 @@ public class Q11286 {
         int n = Integer.parseInt(br.readLine());
 
         PriorityQueue<Integer> pq = new PriorityQueue<>((a,b)->{
-            if(Math.abs(a) > Math.abs(b)){
+            if(Math.abs(a) == Math.abs(b)){
                 return a-b;
             }
             return Math.abs(a)-Math.abs(b);
