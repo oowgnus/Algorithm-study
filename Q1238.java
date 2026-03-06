@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.PriorityQueue;
 import java.util.StringTokenizer;
 
-public class Q1753 {
+public class Q1238 {
     static class Node implements Comparable<Node>{
         int target;
         int weight;
@@ -26,17 +26,16 @@ public class Q1753 {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
 
-        int v = Integer.parseInt(st.nextToken());
-        int e = Integer.parseInt(st.nextToken());
+        int n = Integer.parseInt(st.nextToken());
+        int m = Integer.parseInt(st.nextToken());
+        int x = Integer.parseInt(st.nextToken());
 
-        int start = Integer.parseInt(br.readLine());
-
-        ArrayList<Node>[] adj = new ArrayList[v+1];
-        for(int i=1;i<=v;i++){
+        ArrayList<Node>[] adj = new ArrayList[n+1];
+        for(int i=0;i<=n;i++){
             adj[i] = new ArrayList<>();
         }
 
-        for(int i=0;i<e;i++){
+        for(int i=0;i<m;i++){
             st = new StringTokenizer(br.readLine());
             int a = Integer.parseInt(st.nextToken());
             int b = Integer.parseInt(st.nextToken());
@@ -45,37 +44,33 @@ public class Q1753 {
             adj[a].add(new Node(b,c));
         }
 
-        int[] dist = new int[v+1];
-        Arrays.fill(dist, Integer.MAX_VALUE);
-        dist[start] = 0;
+        int[] dist = new int[n+1];
+        Arrays.fill(dist, Integer.MIN_VALUE);
+        dist[x] = 0;
 
         PriorityQueue<Node> pq = new PriorityQueue<>();
-        pq.offer(new Node(start, 0));
+        pq.add(new Node(x,0));
 
         while (!pq.isEmpty()) {
             Node curr = pq.poll();
             int next = curr.target;
             int d = curr.weight;
 
-            if(dist[next] < d) continue;
+            if(dist[next] > d) continue;
 
             for(Node to : adj[next]){
-                if(dist[to.target] > dist[next] + to.weight){
+                if(dist[to.target] < dist[next] + to.weight){
                     dist[to.target] = dist[next] + to.weight;
-                    pq.offer(new Node(to.target, dist[to.target]));
+                    pq.add(new Node(to.target, dist[to.target]));
                 }
             }
         }
 
-        StringBuilder sb = new StringBuilder();
-        for(int i=1;i<=v;i++){
-            if(dist[i] > 2000000){
-                sb.append("INF").append("\n");
-            }else{
-                sb.append(dist[i]).append("\n");
-            }
+        int result = Integer.MIN_VALUE;
+        for(int i=0;i<=n;i++){
+            result = Math.max(result, dist[i]);
         }
 
-        System.out.println(sb);
+        System.out.println(result);
     }
 }
