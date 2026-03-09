@@ -7,8 +7,7 @@ import java.util.PriorityQueue;
 import java.util.StringTokenizer;
 
 public class Q1916 {
-    public static int n,m;
-
+    
     static class Node implements Comparable<Node>{
         int target;
         int weight;
@@ -20,22 +19,22 @@ public class Q1916 {
 
         @Override
         public int compareTo(Node o){
-            return this.weight - o.weight;
+            return this.weight - o.weight;  
         }
     }
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        
-        n = Integer.parseInt(br.readLine());
-        m = Integer.parseInt(br.readLine());
+
+        int n = Integer.parseInt(br.readLine());
+        int m = Integer.parseInt(br.readLine());
 
         ArrayList<Node>[] adj = new ArrayList[n+1];
         for(int i=1;i<=n;i++){
             adj[i] = new ArrayList<>();
         }
-        
-        for(int i=0;i<m;i++){
+
+        for(int i=0;i<8;i++){
             StringTokenizer st = new StringTokenizer(br.readLine());
             int a = Integer.parseInt(st.nextToken());
             int b = Integer.parseInt(st.nextToken());
@@ -51,9 +50,9 @@ public class Q1916 {
         int[] dist = new int[n+1];
         Arrays.fill(dist, Integer.MAX_VALUE);
         dist[start] = 0;
-        
+
         PriorityQueue<Node> pq = new PriorityQueue<>();
-        pq.offer(new Node(start,0));
+        pq.add(new Node(start,0));
 
         while (!pq.isEmpty()) {
             Node curr = pq.poll();
@@ -65,11 +64,12 @@ public class Q1916 {
             for(Node next : adj[now]){
                 if(dist[next.target] > dist[now] + next.weight){
                     dist[next.target] = dist[now] + next.weight;
-                    pq.add(new Node(next.target, dist[next.target]));
+                    pq.offer(new Node(next.target, dist[next.target]));
                 }
             }
         }
 
         System.out.println(dist[finish]);
+
     }
 }
