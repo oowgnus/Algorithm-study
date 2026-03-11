@@ -13,13 +13,32 @@ public class Q9935 {
 
         Stack<Character> stack = new Stack<>();
         for(int i=0;i<line.length();i++){
-            if(line.charAt(i) != bomb.charAt(bomb.length()-1)){
-                stack.add(line.charAt(i));
-            }else{
-                if(stack.size() > bomb.length()){
-                    
+            stack.push(line.charAt(i));
+
+            if(stack.size() >= bomb.length()){
+                boolean flag = true;
+
+                for(int j=0;j<bomb.length();j++){
+                    if(stack.get(stack.size() - bomb.length() +j) != bomb.charAt(j)){
+                        flag = false;
+                        break;
+                    }
+                }
+
+                if(flag){
+                    for(int j=0;j<bomb.length();j++){
+                        stack.pop();
+                    }
                 }
             }
+        }
+
+        if(stack.isEmpty()){
+            System.out.println("FRULA");
+        }else{
+            StringBuilder sb = new StringBuilder();
+            for(char c : stack) sb.append(c);
+            System.out.println(sb);
         }
     }
 }
