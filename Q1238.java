@@ -18,7 +18,7 @@ public class Q1238 {
 
         @Override
         public int compareTo(Node o){
-            return this.weight-o.weight;
+            return this.weight - o.weight;
         }
     }
 
@@ -31,8 +31,10 @@ public class Q1238 {
         int x = Integer.parseInt(st.nextToken());
 
         ArrayList<Node>[] adj = new ArrayList[n+1];
-        for(int i=0;i<=n;i++){
+        ArrayList<Node>[] adj2 = new ArrayList[n+1];
+        for(int i=1;i<=n;i++){
             adj[i] = new ArrayList<>();
+            adj2[i] = new ArrayList<>();
         }
 
         for(int i=0;i<m;i++){
@@ -41,36 +43,62 @@ public class Q1238 {
             int b = Integer.parseInt(st.nextToken());
             int c = Integer.parseInt(st.nextToken());
 
-            adj[a].add(new Node(b,c));
+            adj[a].add(new Node(b, c));
+            adj2[b].add(new Node(a,c));
         }
 
-        int[] dist = new int[n+1];
-        Arrays.fill(dist, Integer.MIN_VALUE);
-        dist[x] = 0;
+        int[] dist1 = new int[n+1];
+        Arrays.fill(dist1, Integer.MAX_VALUE);
+        dist1[x] = 0;
 
         PriorityQueue<Node> pq = new PriorityQueue<>();
-        pq.add(new Node(x,0));
+        pq.offer(new Node(x,0));
 
         while (!pq.isEmpty()) {
             Node curr = pq.poll();
-            int next = curr.target;
+            int to = curr.target;
             int d = curr.weight;
 
-            if(dist[next] > d) continue;
+            if(dist1[to] < d) continue;
 
-            for(Node to : adj[next]){
-                if(dist[to.target] < dist[next] + to.weight){
-                    dist[to.target] = dist[next] + to.weight;
-                    pq.add(new Node(to.target, dist[to.target]));
+            for(Node next : adj[to]){
+                if(dist1[next.target] > dist1[to] + next.weight){
+                    dist1[next.target] = dist1[to] + next.weight;
+                    pq.offer(new Node(next.target, dist1[next.target]));
+                }
+            }
+        }
+
+
+        int[] dist2 = new int[n+1];
+        Arrays.fill(dist2, Integer.MAX_VALUE);
+        dist2[x] = 0;
+
+        pq = new PriorityQueue<>();
+        pq.offer(new Node(x,0));
+
+        while (!pq.isEmpty()) {
+            Node curr = pq.poll();
+            int to = curr.target;
+            int d = curr.weight;
+
+            if(dist2[to] < d) continue;
+
+            for(Node next : adj2[to]){
+                if(dist2[next.target] > dist2[to] + next.weight){
+                    dist2[next.target] = dist2[to] + next.weight;
+                    pq.offer(new Node(next.target, dist2[next.target]));
                 }
             }
         }
 
         int result = Integer.MIN_VALUE;
-        for(int i=0;i<=n;i++){
-            result = Math.max(result, dist[i]);
+        for(int i=1;i<=n;i++){
+            result = Math.max(result, dist1[i]+dist2[i]);
         }
 
         System.out.println(result);
+
+        
     }
 }
