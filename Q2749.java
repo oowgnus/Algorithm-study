@@ -2,8 +2,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class Q11444 {
-  public static long MOD = 1000000007L;
+public class Q2749 {
+  public static long MOD = 1000000L;
 
   public static long[][] multiply(long[][] m1, long[][] m2){
     long[][] res = new long[2][2];
